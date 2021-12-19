@@ -1,0 +1,157 @@
+.wrap{
+    width: 1200px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+.menu{
+    width: auto;
+    margin: 15px;
+    color: white;
+    text-align: center;
+}
+.menu li {
+
+    font-size: 13px;
+    padding: 15px;
+    list-style-type: none;
+    padding: 0px 10px;
+}
+.menu a{
+
+    text-decoration:none;
+    color: white;
+    text-align: center; 
+    line-height: 50px;
+}
+.menu a:hover{
+    color: #55AFB7;
+}
+h1{
+    padding-bottom: 3px;
+    text-align: center;
+    font-style: initial;
+}
+.intro{
+    width: 540px;
+    height: 400px;
+    padding: 15px;
+    margin: 15px;
+    text-align: center; 
+}
+.intro h3{
+    padding-top: auto;
+    padding-bottom: auto;
+    font-size: 26px;
+}
+
+.intro h4{
+    padding-top: 50px;
+    font-size: 20px;
+    line-height: 40px;
+    font-weight: bold;
+}
+.intro p{
+    padding: 5px 35px;
+    font-size: 17px;
+    text-align: left;
+    line-height: 25px;
+    margin-top: auto;
+}
+#h2background{
+    width: 1200px;
+    background-image:linear-gradient(rgba(4, 81, 132, 0.781), rgba(4, 81, 132, 0.781)), url(img/asset\ 16.webp);
+    height: 140px;
+    text-align: center;
+}
+
+h2{
+    font-size: 22px;
+    color: white;
+    text-align: center;
+    margin: auto;
+    padding: 0 250px;
+    line-height: 30px;
+}
+
+.schedule{
+    width: 240px;
+    height: 460px;
+    padding: 15px;
+    margin: 15px;
+    text-align: center; 
+}
+
+.schedule img{
+    height: 90px;
+}
+
+.schedule h3{
+    padding: 25px 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.schedule h4{
+    padding: 30px 0;
+    font-size: 18px;
+    color: #F50038;
+}
+
+.schedule li{
+    font-size: 16px;
+    text-align: left;
+    list-style-type: disc;
+    padding: 0 10px;
+}
+
+.tool{
+    width: 240px;
+    padding: 15px;
+    margin: 15px;
+    text-align: center; 
+}
+
+.tool #using{
+    height: 30px;
+    padding: 10px 15px;
+}
+
+.tool img{
+    margin: 10px;
+}
+
+.tool h3{
+    font-size: 18px;
+    font-weight: normal;
+}
+
+.tool li{
+    font-size: 16px;
+    text-align: left;
+    list-style-type: disc;
+    padding: 0 10px;
+    line-height: 20px;
+}
+
+.company{
+    width: 240px;
+    height: 40px;
+    padding: 15px;
+    margin: 15px;
+    text-align: center; 
+}
+
+.company img{
+    height: 55px;
+}
+
+footer .wrap{
+    border-color: #EEEEEE;
+}
+
+footer .wrap h2{
+    font-size: 20px;
+    font-weight: bold;
+}
+
