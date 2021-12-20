@@ -165,7 +165,8 @@ h2{
 
 .tool #using{
     height: 30px;
-    padding: 10px 15px;
+    padding: 0px 15px;
+    margin-bottom: 5px;
 }
 
 .tool img{
