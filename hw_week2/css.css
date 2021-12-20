@@ -30,9 +30,10 @@ header{
     color: white;
     text-align: center;
 }
-.menu nav {
+.menu nav a {
 
     font-size: 13px;
+    margin: 5px;
     padding: 15px;
     list-style-type: none;
     padding: 0px 10px;
