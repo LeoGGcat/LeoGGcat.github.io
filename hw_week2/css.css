@@ -19,7 +19,6 @@
     padding: 0px 10px;
 }
 .menu a{
-
     text-decoration:none;
     color: white;
     text-align: center; 
@@ -54,9 +53,7 @@
     margin-bottom: 20px;
 }
 .sign a{
-    width: 300px;
     color: white;
-    margin: 15px;
     padding: 15px 30px;
     background-color: rgba(1, 85, 163, 0.6);
     font-size: 16px;
