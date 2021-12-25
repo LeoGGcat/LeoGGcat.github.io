@@ -1,0 +1,260 @@
+.header,.main,.footer{
+    width: auto;
+    margin: auto;
+}
+.header{
+    background-color: black;
+    position: fixed;
+    top: 0;
+    left: 0px;
+    right: 0px;
+    z-index: 10;
+}
+.menulist,.advmenu,.adv{
+    display: flex;
+    flex-wrap: wrap;
+}
+nav{
+    margin: auto;
+    width: 800;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+.menu{
+    margin: 3px;
+    width: 178px;
+    border-bottom: 3px solid black;
+
+}
+.menu a{
+    text-decoration:none;
+    color: white;
+    line-height: 70px;
+    font-size: 20px;
+}
+.menu:hover ,.menu:active{
+    border-bottom: 3px solid #E7211B;
+}
+
+.main{
+    padding-top: 80px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+h1{
+    font-size: 45px;
+    text-align: center;
+    padding: 15px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+
+}
+
+h1::after{
+    content: '';
+    position: absolute;
+    width: 50px;
+    bottom: 0;
+    border-bottom: 6px solid black;
+    justify-content: center;
+}
+
+
+
+.advlist{
+    margin: 3px;
+    width: 178px;
+    position: relative;
+    overflow: hidden;
+}
+.advlist a{
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    text-decoration:none;
+    border: 1px dashed black;
+    color: black;
+    font-size: 20px;
+    line-height: 38px;
+    transition: 1s;
+    z-index: 1;
+}
+
+.red{
+    position: absolute;
+    background-color: #AE0014;
+    top: 96%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    z-index: 0;
+    transition: 1s;
+}
+
+.advlist:hover .red{
+    top: 0;
+}
+
+.advlist:hover a{
+    color: white;
+}
+
+.detail{
+    width: 100%;
+    max-width: 1200px;
+    height: 100%;
+    margin: auto;
+    padding: 100px;
+}
+
+.adv{
+    margin: auto;
+    position: relative;
+    margin-top: 500px;
+    margin-bottom: 400px;
+}
+
+.grey,.revolution,.feature{
+    position: absolute;
+    margin: auto;
+    z-index: 2;
+}
+
+.adv .car{
+    position: relative;
+    margin: auto;
+    z-index: 1;
+    left: 50px;
+}
+
+.car:
+
+.car::after{
+    content:  '';
+    position: absolute;
+    background-image: url(img/video-icon.png);
+    width: 57px;
+    height: 36px;
+    z-index: 2;
+    bottom: 50%;
+    right: -15px;
+}
+
+.grey{
+    width: 439px;
+    height: 290px;
+    background-color: #F5F5F5;
+    z-index: 0;
+    right: 100px;
+    top: -120px;
+}
+
+.feature{
+    width: 357px;
+    color: white;
+    top: -120px;
+    left: 80px;
+}
+
+.revolution{
+    width: 662px;
+    background-color: #EEEEEE;
+    padding: 2px 20px 5px 20px;
+    top: 400px;
+    left: 100px;
+}
+
+.feature .index{
+    display: flex;
+    margin-bottom: 0;
+
+}
+
+.index p{
+    font-size: 120px;
+    transform: rotate(90deg);
+    position: relative;
+    margin: 0;
+    background-color: #B40404;
+}
+
+.index h2{
+    width: 240px;
+    font-size: 55px;
+    line-height: 60px;
+    color: white;
+    margin: 0;
+    background-color: #B40404;
+}
+
+.feature .describe{
+    background-color: black;
+    margin: 0;
+    
+}
+
+.describe h3{
+    font-size: 28px;
+    line-height: 40px;
+    padding:15px 15px 0px 15px;
+    margin: 0px;
+    text-align: left;
+}
+
+.describe p{
+    font-size: 21px;
+    text-align: left;
+    padding: 5px 15px 5px 15px;
+    line-height: 40px;
+}
+
+.revolution h3{
+    color: #B40404;
+    font-weight: 800;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.revolution h3::after{
+    content: "--------------------------------------------------------------------------";
+    color: transparent;
+    padding-left: 2px;
+    text-decoration: line-through #B40404;
+}
+
+.revolution h4{
+    width: auto;
+    height: auto;
+    display: inline-block;
+    background-color: black;
+    color: white;
+    font-size: 16px;
+    padding: 4px;
+    margin: 1px;
+}
+
+.revolution p{
+    line-height: 25px;
+    font-size: 16px;
+    margin: 1px;
+    padding: 1px 17px 1px 15px;
+    padding-left: 1em;
+    text-indent: -1.3em;
+}
+
+.revolution p::before{
+    content: "．";
+    font-size: 20px;
+    color: #B40404;
+}
+
+.adv:first-child{
+    margin-top: 100px;
+}
+
