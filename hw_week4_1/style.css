@@ -294,18 +294,21 @@ nav a:hover {
 }
 
 .whychooseus .col-12 .col-12 {
-  background-color: #3F81FF;
   margin: 30px 0px;
   padding: 20px;
   border-radius: 5%;
 }
 
-.whychooseus .col-12 .col-12 p {
+.whychooseus .col-12 .col-12 .data {
+  background-color: #3F81FF;
+}
+
+.whychooseus .col-12 .col-12 .data p {
   font-size: 30px;
   text-align: center;
 }
 
-.whychooseus .col-12 .col-12 p:nth-of-type(2) {
+.whychooseus .col-12 .col-12 .data p:nth-of-type(2) {
   font-size: 14px;
 }
 
@@ -548,17 +551,22 @@ footer .right a {
         flex-wrap: wrap;
   }
   .whychooseus .col-md-6 .col-md-6 {
+    margin: 0;
+  }
+  .whychooseus .col-md-6 .col-md-6 .data {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
+    width: 90%;
+    height: 120%;
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
-    padding: 10px;
-  }
-  .whychooseus .col-md-6 .col-md-6 .data {
-    margin: 10px;
+    border-radius: 10%;
+    -ms-flex-line-pack: center;
+        align-content: center;
+    padding: 0 26px;
   }
   .whychooseus .col-md-6 .col-md-6 .data p {
     width: 100%;
