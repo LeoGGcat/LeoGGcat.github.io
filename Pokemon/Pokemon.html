@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>渣男小智換我大比鳥</title>
 </head>
 
 <body>
@@ -15,12 +15,16 @@
     <button onclick='fetchPokemon_appendChild()'>載入寶可夢圖鑑列表appendChild()</button>
     <button id="add">+1</button>
     <button id="minus">-1</button>
+    <button id="timer">timer</button>
+    <button id="stop">stop</button>
     <button id='reset' onclick="resetPokemon()">Reset</button>
 
     <div id='container'></div>
 
     <script>
         let container = document.getElementById('container');
+        
+        let index = 1;
 
         window.onload = setPokemon();
 
@@ -34,6 +38,8 @@
 
           let pokemonImg = `<img src='${pathfile}'>`;
           container.innerHTML = pokemonImg;
+          index++
+
         }
 
         //方式2:新增DOM元素
@@ -48,12 +54,13 @@
         function fetchPokemon() {
           let pokemons = "";
 
-          for (let i = 1; i<899; i++) {
-            let filename = i.toString().padStart(3, '0');
+          for (index = 1; index<899; index++) {
+            let filename = index.toString().padStart(3, '0');
             let pathfile =`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${filename}.png`;
             let pokemonImg = `<img src='${pathfile}'>`;
             pokemons += pokemonImg;
           }
+          index--
 
           container.innerHTML = pokemons;
         }
@@ -64,8 +71,8 @@
 
           let filename, pathFile
 
-          for (i = 1; i < 899; i++){            
-            filename = i.toString().padStart(3, '0');
+          for (index=1 ; index < 899; index++){            
+            filename = index.toString().padStart(3, '0');
             pathFile = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${filename}.png`
 
             let img = document.createElement("img");
@@ -73,6 +80,7 @@
 
             container.appendChild(img);
           }
+          index--
         }
 
         function resetPokemon() {
@@ -81,6 +89,7 @@
           while (container.firstChild) {
             container.removeChild(container.firstChild);
           }
+          index = 0;
         }
 
         //1. 將第二個Button改成 btn2.onclick寫法
@@ -91,8 +100,8 @@
 
           let filename , pathfile
 
-          for(i=1 ; i<899 ;i++){
-            filename=i.toString().padStart(3,"0");
+          for(index = 1 ; index<899 ;index++){
+            filename=index.toString().padStart(3,"0");
             pathfile=`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${filename}.png`;
 
             img = document.createElement("img");
@@ -100,6 +109,7 @@
 
             container.appendChild(img);
           }
+          index--
         }
 
 
@@ -109,22 +119,23 @@
         let btn_listen = document.getElementById("listener");
         btn_listen.addEventListener("click", function (event) {
           container.innerHTML = "";
-
           let filename, pathfile;
 
-          for(i=1 ; i<899 ; i++){
-            filename = i.toString().padStart(3 , "0");
+          for(index=1 ; index<899 ; index++){
+            filename = index.toString().padStart(3 , "0");
             pathfile = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${filename}.png`
 
             img = document.createElement("img");
             img.setAttribute("src", pathfile);
 
+            img.addEventListener('click', removeImg)
+
             container.appendChild(img);
           }
+          index--
         })
 
         //3.加一按鈕(宣告全域變數index, click後加入Dom Element, index++)
-        let index = 0;
         let btn_add = document.getElementById("add");
 
         btn_add.addEventListener("click",function (event) {
@@ -134,6 +145,8 @@
             img = document.createElement("img");
             img.setAttribute("src", `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${pathfile}.png`);
             container.appendChild(img);
+            }else{
+              alert("寶可夢太多了")
             }
           })
 
@@ -142,8 +155,43 @@
         btn_minus.addEventListener("click",function (event) {
           if(container.lastChild != null){
             container.removeChild(container.lastChild);
+            index--
+          }else{
+            alert("寶可夢要絕種了")
           }
         })
+
+        //點擊清除圖片
+        function removeImg(event){
+          container.removeChild(event.target)
+        }
+
+        //timer
+        let intervalID;
+        let timer = document.getElementById("timer")
+        timer.addEventListener('click', function(){
+          intervalID = setInterval(addPokemon, 500)
+        })
+
+        let stop = document.getElementById('stop')
+        stop.addEventListener('click', function(){
+          clearInterval(intervalID)
+        })
+
+        function addPokemon(){
+
+          let img = document.createElement('img')
+
+          let no = index.toString().padStart(3, '0')
+          img.setAttribute('src' , `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${no}.png`)
+
+          img.setAttribute('id', no)
+          img.addEventListener('click', removeImg)
+
+          container.appendChild(img)
+
+          index++
+        }
 
     </script>
 </body>

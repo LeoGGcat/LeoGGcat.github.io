@@ -77,8 +77,8 @@
         })
 
         drawPieChart(companies, data)
-      }
-</script>
+    }
+    </script>
 
     <script>
         //第一個參數為標題陣列, 第二個參數為資料陣列
@@ -145,9 +145,9 @@
 			marketingShare.data.forEach(row =>{
 				const tbody_tr = document.createElement('tr')
 
-				Object.values(row).forEach(el =>{
+				Object.keys(row).forEach(el =>{
 					const td = document.createElement('td')
-					td.innerText = el
+					td.innerText = row[el]
 
 					tbody_tr.appendChild(td)
 				})
