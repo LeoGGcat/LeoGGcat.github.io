@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="Zh-Hant">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>你若是來台灣，請你斟酌看</title>
+</head>
+
+<body>
+  <h1>Select / Option 下拉式選單</h1>
+  <select id="city"></select>
+  <select id="district"></select>
+  <input type="submit" value="送出">
+
+  <script>
+    //全域變數
+    const twnurl = "https://raw.githubusercontent.com/apprunner/FileStorage/master/TaiwanAddress.json"
+    let CityArray = []
+    let DistrictArray = []
+
+    //DOM
+    const citySelect = document.querySelector("#city")
+    const districtSelect = document.querySelector("#district")
+    const submitBtn = document.querySelector("input")
+
+
+    window.onload = function () {
+      getFetch()
+      citySelect.onchange = function(){
+        const selectedCity = citySelect.value
+        DistrictArray = [""].concat(CityArray.find(x=>x.CityName == selectedCity).AreaList.map(x=>`${x.ZipCode} ${x.AreaName}`))
+        setDistrictSelect()
+        setUI()
+      }
+
+      districtSelect.onchange = function(){
+        setUI()
+      }
+    }
+
+    //function
+    function getFetch() {
+      fetch(twnurl)
+        .then(res => res.json())
+        .then(data => {
+          CityArray = [{ CityName: "", AreaList: [] }].concat(data)
+          // debugger
+          DistrictArray = [""]
+          setCitySelect()
+          setDistrictSelect()
+          setUI()
+        })
+        .catch(ex => { console.warn(ex) })
+    }
+
+    function setCitySelect() {
+
+      CityArray.forEach(city => {
+        let cityOption = document.createElement("option")
+        cityOption.innerText = city.CityName == "" ? "請選擇縣市" : city.CityName
+        cityOption.value = city.CityName
+        citySelect.appendChild(cityOption)
+      })
+    }
+
+    function setDistrictSelect() {
+
+      DistrictArray.forEach(district => {
+        let districtOption = document.createElement("option")
+        districtOption.innerText = district == "" ? "請選擇行政區" : district
+        districtOption.value = district
+        districtSelect.appendChild(districtOption)
+      })
+    }
+
+    function setUI() {
+      if(citySelect.value == ""){
+        districtSelect.setAttribute("disabled","true")
+        submitBtn.setAttribute("disabled" , "true")
+      }else{
+        districtSelect.removeAttribute("disabled")
+      }
+      if(districtSelect.value == ""){
+        submitBtn.setAttribute("disabled","true")
+      }else{
+        submitBtn.removeAttribute("disabled")
+      }
+    }
+
+
+
+
+  </script>
+</body>
+
+</html>
