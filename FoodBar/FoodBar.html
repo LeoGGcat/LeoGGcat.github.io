@@ -255,17 +255,7 @@
         steps = ramdom + (3 * foodArray.length)// v2 讓他多跑幾圈
         allsteps = steps
         barSpin()
-        const selectedStore = eatWhere.firstChild.innerText
-        console.log(selectedStore)
-        // console.log(foodArray[currentIndex-1].name)
-        dishArray = [].concat(foodArray.find(x => x.name == selectedStore).menu)
-        console.log(dishArray)
 
-        eatWhatspeed = 200 //因為Speed是變數，所以每次都要將速度調回預設
-
-        let eatWhatRamdom = Math.floor(Math.random() * dishArray.length) + 1
-        eatWhatSteps = eatWhatRamdom+(3 * foodArray.length)// v2 讓他多跑幾圈
-        allEatWhatSteps = eatWhatSteps
 
       }
     }
@@ -295,36 +285,53 @@
         } else {
           speed -= 1//加速
         }
-      }else{
+      } else {
+        const selectedStore = eatWhere.firstChild.innerText
+        console.log(selectedStore)
+        // console.log(foodArray[currentIndex-1].name)
+        dishArray = [].concat(foodArray.find(x => x.name == selectedStore).menu)
+        console.log(dishArray)
+
+        eatWhatspeed = 200 //因為Speed是變數，所以每次都要將速度調回預設
+
+        let eatWhatRamdom = Math.floor(Math.random() * dishArray.length) + 1
+        eatWhatSteps = eatWhatRamdom + (3 * dishArray.length)// v2 讓他多跑幾圈
+        allEatWhatSteps = eatWhatSteps
+        eatWhatCurrentIndex = 0
         dishBarSpin()
       }
     }
 
-    function dishBarSpin(){  
-        let dishName = document.createElement('p')
-        dishName.innerText = dishArray[eatWhatCurrentIndex].dish
-        eatWhat.appendChild(dishName)
-        eatWhatCurrentIndex++
-        eatWhatSteps--
-        //清除第一個元素，讓格子中文字進行切換
-        eatWhat.removeChild(eatWhat.firstChild)
+    function dishBarSpin() {
+      let dishName = document.createElement('p')
+      dishName.innerText = dishArray[eatWhatCurrentIndex].dish
+      eatWhat.appendChild(dishName)
+      eatWhatCurrentIndex++
+      eatWhatSteps--
+      //清除第一個元素，讓格子中文字進行切換
+      eatWhat.removeChild(eatWhat.firstChild)
 
-        //index到Array最大值時會回歸到0
-        if (eatWhatCurrentIndex >= foodArray.length) eatWhatCurrentIndex = 0
 
-        //判斷走完、未走完的動作
-        if (eatWhatSteps > 0) {
-          //還沒走完
-          setTimeout(dishBarSpin, eatWhatspeed) //判斷沒走完，就再走一步
-          //加速
-          //搭配v2，以剩餘步數搭配變速，當剩餘步數剩下1/3時減速
-          if (eatWhatSteps <= Math.floor(allEatWhatSteps / 3)) {
-            eatWhatspeed += 20
-          } else {
-            eatWhatspeed -= 1//加速
-          }
-        }else {
-          msgShow.innerText = `今天吃${dishArray[eatWhatCurrentIndex-1].dish} 要花${dishArray[eatWhatCurrentIndex].price}元`
+      //index到Array最大值時會回歸到0
+      if (eatWhatCurrentIndex  >= dishArray.length ) eatWhatCurrentIndex = 0
+
+      //判斷走完、未走完的動作
+      if (eatWhatSteps > 0) {
+        console.log(dishArray)
+        console.log(eatWhatCurrentIndex)
+        //還沒走完
+        setTimeout(dishBarSpin, eatWhatspeed) //判斷沒走完，就再走一步
+
+        //加速
+        //搭配v2，以剩餘步數搭配變速，當剩餘步數剩下1/3時減速
+        if (eatWhatSteps <= Math.floor(allEatWhatSteps / 3)) {
+          eatWhatspeed += 20
+        } else {
+          eatWhatspeed -= 1//加速
+        }
+      } else {
+
+        msgShow.innerText = `今天吃${dishArray[eatWhatCurrentIndex - 1].dish} 要花${dishArray[eatWhatCurrentIndex].price}元`
       }
     }
   </script>
