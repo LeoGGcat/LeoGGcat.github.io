@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="Zh-Hant">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- CSS recet -->
+  <link rel="stylesheet" href="reset.css">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+    integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+  <title>飆斯酷兒午餐吃甚麼</title>
+  <style>
+
+  </style>
+</head>
+
+<body>
+  <div class="container mt-5">
+    <h1>
+      飆斯酷兒午餐吃甚麼
+    </h1>
+    <div class="row m-auto">
+      <div class="row">
+        <div class="col-6" id="EatWhere">
+          吃哪裡
+        </div>
+        <div class="col-6" id="EatWhat">
+          吃什麼
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-10" id="msg">按下右邊按鈕，幫你決定午餐吃哪裡 </div>
+      <button class="col-2">Go！</button>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
+  <script>
+    //宣告
+    let steps = 0 // 剩下要走的步數
+    let allSteps = 0 //全部的步數
+    let currentIndex = 0 //現在在哪一格
+    let speed = 50 //settimeout鐘的時間參數，等於移動的速度，速度愈大愈慢
+    let eatWhatSteps = 0 //吃什麼剩下的步數
+    let allEatWhatSteps = 0 //吃什麼全部的步數
+    let eatWhatCurrentIndex = 0 //吃什麼現在在哪一格
+    let eatWhatspeed = 50 //settimeout鐘的時間參數，等於移動的速度，速度愈大愈慢，吃什麼剩下的時間
+    let foodArray = []
+    let dishArray = []
+
+    //格子資料
+    const BSLunch = [
+      {
+        "name": "小四川麵食",
+        "menu": [
+          {
+            "dish": "餛飩麵",
+            "price": 70
+          },
+          {
+            "dish": "牛肉麵",
+            "price": 100
+          },
+          {
+            "dish": "水餃10顆",
+            "price": 50
+          },
+          {
+            "dish": "麻醬麵",
+            "price": 60
+          }
+        ]
+      },
+      {
+        "name": "自助餐店",
+        "menu": [
+          {
+            "dish": "鯖魚便當",
+            "price": 90
+          },
+          {
+            "dish": "蒜泥白肉便當",
+            "price": 75
+          },
+          {
+            "dish": "菜飯",
+            "price": 60
+          },
+          {
+            "dish": "控肉便當",
+            "price": 60
+          },
+          {
+            "dish": "雞腿便當",
+            "price": 100
+          }
+        ]
+      },
+      {
+        "name": "小四川麵食",
+        "menu": [
+          {
+            "dish": "餛飩麵",
+            "price": 70
+          },
+          {
+            "dish": "牛肉麵",
+            "price": 100
+          },
+          {
+            "dish": "水餃10顆",
+            "price": 50
+          },
+          {
+            "dish": "麻醬麵",
+            "price": 60
+          }
+        ]
+      },
+      {
+        "name": "小辣椒魷魚羹",
+        "menu": [
+          {
+            "dish": "魷魚羹麵",
+            "price": 80
+          },
+          {
+            "dish": "羊肉羹麵",
+            "price": 80
+          },
+          {
+            "dish": "乾麵",
+            "price": 50
+          },
+          {
+            "dish": "滷肉飯",
+            "price": 40
+          }
+        ]
+      },
+      {
+        "name": "麥當勞",
+        "menu": [
+          {
+            "dish": "1號餐 大麥克",
+            "price": 129
+          },
+          {
+            "dish": "2號餐 雙層牛肉吉士堡",
+            "price": 125
+          },
+          {
+            "dish": "3號餐 四盎司牛肉堡 ",
+            "price": 105
+          },
+          {
+            "dish": "4號餐 雙層四盎司牛肉堡",
+            "price": 165
+          },
+          {
+            "dish": "5號餐 美式培根牛肉堡",
+            "price": 149
+          },
+          {
+            "dish": "6號餐 麥香魚",
+            "price": 115
+          },
+          {
+            "dish": "7號餐 麥香雞",
+            "price": 105
+          },
+          {
+            "dish": "8號餐 麥克雞塊",
+            "price": 139
+          },
+          {
+            "dish": "9號餐 勁辣雞腿堡",
+            "price": 129
+          },
+          {
+            "dish": "10號餐 麥脆雞",
+            "price": 142
+          }
+        ]
+      },
+      {
+        "name": "八方雲集",
+        "menu": [
+          {
+            "dish": "招牌鍋貼 10顆",
+            "price": 55
+          },
+          {
+            "dish": "招牌水餃 10顆",
+            "price": 55
+          },
+          {
+            "dish": "韭菜鍋貼 10顆",
+            "price": 60
+          },
+          {
+            "dish": "韭菜水餃 10顆",
+            "price": 60
+          },
+          {
+            "dish": "泡菜鍋貼 10顆",
+            "price": 65
+          },
+          {
+            "dish": "泡菜水餃 10顆",
+            "price": 65
+          },
+          {
+            "dish": "酸辣湯餃",
+            "price": 70
+          }
+        ]
+      }
+    ]
+
+    //DOM
+    let eatWhere = document.querySelector('#EatWhere')
+    let eatWhat = document.querySelector('#EatWhat')
+    const startBtn = document.querySelector('button')
+    let msgShow = document.querySelector('#msg')
+
+    //window.onload
+    window.onload = function () {
+
+      BSLunch.forEach((food, index) => {
+        let id = BSLunch.indexOf(food)
+        let data = BSLunch[id]
+
+        // let foodSelect = document.createElement('p')
+        // foodSelect.innerText = data.name
+        // food = foodSelect.innerText
+        foodArray.push(data)
+      })
+      //按下Start
+      startBtn.onclick = function () {
+        speed = 50 //因為Speed是變數，所以每次都要將速度調回預設
+
+        let ramdom = Math.floor(Math.random() * foodArray.length) + 1
+        // steps = ramdom // v1
+        steps = ramdom + (3 * foodArray.length)// v2 讓他多跑幾圈
+        allsteps = steps
+        barSpin()
+      }
+    }
+
+    //function
+    function barSpin() {
+      // 移動的時候變換eatWhere中文字
+      let store = document.createElement('p')
+      store.innerText = foodArray[currentIndex].name
+      eatWhere.appendChild(store)
+      currentIndex++
+      steps--
+      //清除第一個元素，讓格子中文字進行切換
+      eatWhere.removeChild(eatWhere.firstChild)
+
+      //index到Array最大值時會回歸到0
+      if (currentIndex >= foodArray.length) currentIndex = 0
+
+      //判斷走完、未走完的動作
+      if (steps > 0) {
+        //還沒走完
+        setTimeout(barSpin, speed) //判斷沒走完，就在0.05秒後再走一步
+        //加速
+        //搭配v2，以剩餘部署搭配變速，當剩餘步數剩下1/3時減速
+        if (steps <= Math.floor(allsteps / 3)) {
+          speed += 7
+        } else {
+          speed -= 1//加速
+        }
+      } else {
+        dishBarSpin()
+      }
+    }
+
+    function dishBarSpin(){  
+      const selectedStore = eatWhere.firstChild.innerText
+        console.log(selectedStore)
+        // console.log(foodArray[currentIndex-1].name)
+        dishArray = [].concat(foodArray.find(x => x.name == selectedStore).menu)
+        console.log(dishArray)
+
+        speed = 50 //因為Speed是變數，所以每次都要將速度調回預設
+
+        let eatWhatRamdom = Math.floor(Math.random() * dishArray.length) + 1
+        eatWhatSteps = eatWhatRamdom + (3 * dishArray.length)// v2 讓他多跑幾圈
+        allEatWhatSteps = eatWhatSteps
+
+        let dishName = document.createElement('p')
+        dishName.innerText = dishArray[eatWhatCurrentIndex].dish
+        eatWhat.appendChild(dishName)
+        eatWhatCurrentIndex++
+        eatWhatSteps--
+        //清除第一個元素，讓格子中文字進行切換
+        eatWhat.removeChild(eatWhat.firstChild)
+
+        //index到Array最大值時會回歸到0
+        if (eatWhatCurrentIndex >= foodArray.length) eatWhatCurrentIndex = 0
+
+        //判斷走完、未走完的動作
+        if (eatWhatSteps > 0) {
+          //還沒走完
+          setTimeout(dishBarSpin, eatWhatspeed) //判斷沒走完，就在0.05秒後再走一步
+          //加速
+          //搭配v2，以剩餘部署搭配變速，當剩餘步數剩下1/3時減速
+          if (eatWhatSteps <= Math.floor(allEatWhatSteps / 3)) {
+            eatWhatspeed += 7
+          } else {
+            eatWhatspeed -= 1//加速
+          }
+        }else {
+          msgShow.innerText = `今天吃${dishArray[eatWhatCurrentIndex].dish} 要花${dishArray[eatWhatCurrentIndex].price}`
+      }
+    }
+  </script>
+</body>
+
+</html>
