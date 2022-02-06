@@ -24,22 +24,27 @@
 
 <body>
   <div class="container mt-5">
-    <h1>
+    <h1 class="text-center my-5">
       飆斯酷兒午餐吃甚麼
     </h1>
     <div class="row m-auto">
-      <div class="row">
-        <div class="col-6" id="EatWhere">
+      <div class="row ">
+        <div class="col-5 mx-3 d-flex justify-content-center align-content-center flex-wrap fs-3" id="EatWhere">
           吃哪裡
         </div>
-        <div class="col-6" id="EatWhat">
+        <div class="col-5 mx-3 d-flex justify-content-center align-content-center flex-wrap fs-3 " id="EatWhat">
           吃什麼
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-10" id="msg">按下右邊按鈕，幫你決定午餐吃哪裡 </div>
-      <button class="col-2">Go！</button>
+    <div class="row m-0">
+      <div class="col-8 fs-2 " id="msg">
+        按下右邊按鈕，幫你決定午餐吃哪裡
+      </div>
+      <div class="col-2 ">
+        <button class="fs-1 text-center border border-warning rounded-circle" >Go</button>
+      </div>
+      
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
@@ -248,7 +253,7 @@
       })
       //按下Start
       startBtn.onclick = function () {
-        speed = 50 //因為Speed是變數，所以每次都要將速度調回預設
+        speed = 100 //因為Speed是變數，所以每次都要將速度調回預設
 
         let ramdom = Math.floor(Math.random() * foodArray.length) + 1
         // steps = ramdom // v1
@@ -281,9 +286,9 @@
         //加速
         //搭配v2，以剩餘部署搭配變速，當剩餘步數剩下1/3時減速
         if (steps <= Math.floor(allsteps / 3)) {
-          speed += 20
+          speed += 30
         } else {
-          speed -= 1//加速
+          speed -= 5//加速
         }
       } else {
         const selectedStore = eatWhere.firstChild.innerText
@@ -292,10 +297,10 @@
         dishArray = [].concat(foodArray.find(x => x.name == selectedStore).menu)
         console.log(dishArray)
 
-        eatWhatspeed = 200 //因為Speed是變數，所以每次都要將速度調回預設
+        eatWhatspeed = 100 //因為Speed是變數，所以每次都要將速度調回預設
 
         let eatWhatRamdom = Math.floor(Math.random() * dishArray.length) + 1
-        eatWhatSteps = eatWhatRamdom + (3 * dishArray.length)// v2 讓他多跑幾圈
+        eatWhatSteps = eatWhatRamdom + (5 * dishArray.length)// v2 讓他多跑幾圈
         allEatWhatSteps = eatWhatSteps
         eatWhatCurrentIndex = 0
         dishBarSpin()
@@ -324,9 +329,9 @@
         //加速
         //搭配v2，以剩餘步數搭配變速，當剩餘步數剩下1/3時減速
         if (eatWhatSteps <= Math.floor(allEatWhatSteps / 3)) {
-          eatWhatspeed += 20
+          eatWhatspeed += 30
         } else {
-          eatWhatspeed -= 1//加速
+          eatWhatspeed -= 5//加速
         }
       } else {
         console.log(eatWhatCurrentIndex)
