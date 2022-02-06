@@ -318,7 +318,6 @@
       //判斷走完、未走完的動作
       if (eatWhatSteps > 0) {
         console.log(dishArray)
-        console.log(eatWhatCurrentIndex)
         //還沒走完
         setTimeout(dishBarSpin, eatWhatspeed) //判斷沒走完，就再走一步
 
@@ -330,8 +329,13 @@
           eatWhatspeed -= 1//加速
         }
       } else {
-
-        msgShow.innerText = `今天吃${dishArray[eatWhatCurrentIndex - 1].dish} 要花${dishArray[eatWhatCurrentIndex - 1].price}元`
+        console.log(eatWhatCurrentIndex)
+        if(eatWhatCurrentIndex > 0){
+          msgShow.innerText = `今天吃${dishArray[eatWhatCurrentIndex - 1].dish} 要花${dishArray[eatWhatCurrentIndex - 1].price}元`
+        }else{
+          msgShow.innerText = `今天吃${dishArray[dishArray.length - 1].dish} 要花${dishArray[dishArray.length - 1].price}元`
+          console.log(dishArray.length - 1)
+        }
       }
     }
   </script>
