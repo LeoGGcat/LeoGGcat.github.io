@@ -29,10 +29,15 @@
       </div> -->
     </div>
   </div>
+  <script>
+    const main = document.querySelector(".main");
+    let index = 0;
+    let saveindex = 0 ;
+  </script>
+
   <script type="module">
     import { $ce } from "../modules/helpers.js"
     //宣告
-    const main = document.querySelector(".main");
 
     //DOM
     const textAdd = document.querySelector(".addText");
@@ -48,11 +53,11 @@
           alert("請輸入待辦事項")
         } else {
           addTodoList();
+          index++
           textAdd.value = ""
         }
       }
     }
-
 
     //function
     function addTodoList() {
@@ -64,13 +69,13 @@
       let listItemEditButton = $ce("button")
       let listItemDeleteButton = $ce("button")
 
-      listItem.classList.add("todoEvent","input-group", "mb-3")
+      listItem.classList.add(`todoEvent${index}`,"input-group", "mb-3")
       listItemCheckbox.classList.add("input-group-text")
       listItemCheckboxInput.classList.add("form-check-input", "mt-0")
-      listItemText.classList.add("todoText", "form-control")
-      listItemEditButton.classList.add("editEvent", "btn", "btn-warning", "btn-outline-warning", "text-black", "mx-1", "rounded")
+      listItemText.classList.add(`todoText${index}`, "form-control")
+      listItemEditButton.classList.add(`editEvent${index}`, "btn", "btn-warning", "btn-outline-warning", "text-black", "mx-1", "rounded")
       listItemEditButton.innerText = "編輯"
-      listItemDeleteButton.classList.add("deleteEvent", "btn", "btn-danger", "btn-outline-danger", "text-white", "rounded")
+      listItemDeleteButton.classList.add(`deleteEvent${index}`, "btn", "btn-danger", "btn-outline-danger", "text-white", "rounded")
       listItemDeleteButton.innerText = "刪除"
       listItemText.value = textAdd.value;
       listItemText.disabled = true
@@ -79,44 +84,56 @@
       listItem.appendChild(listItemText)
       listItem.appendChild(listItemEditButton)
       listItem.appendChild(listItemDeleteButton)
-      localStorage.setItem("undo",listItemText.value)
+      localStorage.setItem(index,listItemText.value)
       main.appendChild(listItem)
       edit()
       deleteItem()
     }
 
     function edit() {
-        let buttonEdit = document.querySelector(".editEvent");
-        let todoText = document.querySelector(".todoText")
+        var indexInF;
+        if(saveindex > 0){
+          indexInF = saveindex
+          console.log("s"+saveindex)
+          console.log("i"+index)
+        }else{
+          indexInF = index
+          console.log("s"+saveindex)
+          console.log("i"+index)
+        }
+        console.log("f"+indexInF)
+        let buttonEdit = document.querySelector(`.editEvent${indexInF}`);
+        let todoText = document.querySelector(`.todoText${indexInF}`)
         buttonEdit.onclick = function(){
           todoText.disabled = false
           buttonEdit.innerText = "保存"
-          buttonEdit.classList.add("saveEvent", "btn-success", "btn-outline-success", "text-white")
-          buttonEdit.classList.remove("editEvent", "btn-warning", "btn-outline-warning", "text-black")
-          save()
-          deleteItem()
+          buttonEdit.classList.add(`saveEvent${indexInF}`, "btn-success", "btn-outline-success", "text-white")
+          buttonEdit.classList.remove(`editEvent${indexInF}`, "btn-warning", "btn-outline-warning", "text-black")
+          saveindex = indexInF
+          document.getElementsByTagName('button').disabled = true
+          save()  
+          // deleteItem()
         }
     }
 
     function save(){
-      let buttonSave = document.querySelector(".saveEvent");
-      let todoText = document.querySelector(".todoText")
+      let buttonSave = document.querySelector(`.saveEvent${saveindex}`);
+      let todoText = document.querySelector(`.todoText${saveindex}`)
       buttonSave.onclick = function(){
-        localStorage.setItem("undo",todoText.value)
         todoText.disabled = true
         buttonSave.innerText = "編輯"
-        buttonSave.classList.add("editEvent", "btn-warning", "btn-outline-warning", "text-black")
-        buttonSave.classList.remove("saveEvent", "btn-success", "btn-outline-success", "text-white")
+        buttonSave.classList.add(`editEvent${saveindex}`, "btn-warning", "btn-outline-warning", "text-black")
+        buttonSave.classList.remove(`.saveEvent${saveindex}`, "btn-success", "btn-outline-success", "text-white")
         edit()
-        deleteItem()
-
+        // deleteItem()
       }
     }
 
     function deleteItem(){
-      let buttonDelete = document.querySelector(".deleteEvent");
-      let todoText = document.querySelector(".todoText");
-      let todoEvent = document.querySelector(".todoEvent")
+      const indexInF = index
+      let buttonDelete = document.querySelector(`.deleteEvent${indexInF}`);
+      let todoText = document.querySelector(`.todoText${indexInF}`);
+      let todoEvent = document.querySelector(`.todoEvent${indexInF}`)
       buttonDelete.onclick = function(){
         main.removeChild(todoEvent)
       }
