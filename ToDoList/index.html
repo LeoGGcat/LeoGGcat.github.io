@@ -53,6 +53,8 @@
           alert("請輸入待辦事項")
         } else {
           addTodoList();
+          edit()
+          deleteItem()
           index++
           textAdd.value = ""
         }
@@ -86,8 +88,6 @@
       listItem.appendChild(listItemDeleteButton)
       localStorage.setItem(index,listItemText.value)
       main.appendChild(listItem)
-      edit()
-      deleteItem()
     }
 
     function edit() {
@@ -111,8 +111,8 @@
           buttonEdit.classList.remove(`editEvent${indexInF}`, "btn-warning", "btn-outline-warning", "text-black")
           saveindex = indexInF
           document.getElementsByTagName('button').disabled = true
-          save()  
           // deleteItem()
+          save() 
         }
     }
 
@@ -120,13 +120,14 @@
       let buttonSave = document.querySelector(`.saveEvent${saveindex}`);
       let todoText = document.querySelector(`.todoText${saveindex}`)
       buttonSave.onclick = function(){
+        localStorage.setItem(index,todoText.value)
         todoText.disabled = true
         buttonSave.innerText = "編輯"
         buttonSave.classList.add(`editEvent${saveindex}`, "btn-warning", "btn-outline-warning", "text-black")
         buttonSave.classList.remove(`.saveEvent${saveindex}`, "btn-success", "btn-outline-success", "text-white")
         edit()
-        // deleteItem()
       }
+      
     }
 
     function deleteItem(){
@@ -136,6 +137,7 @@
       let todoEvent = document.querySelector(`.todoEvent${indexInF}`)
       buttonDelete.onclick = function(){
         main.removeChild(todoEvent)
+        localStorage.removeItem(indexInF,todoText.value)  
       }
     }
 
