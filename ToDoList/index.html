@@ -52,8 +52,9 @@
         if (textAdd.value == "") {
           alert("請輸入待辦事項")
         } else {
-          addTodoList();
+          addTodoList()
           edit()
+          save()
           deleteItem()
           index++
           textAdd.value = ""
@@ -91,16 +92,8 @@
     }
 
     function edit() {
-        var indexInF;
-        if(saveindex > 0){
-          indexInF = saveindex
-          console.log("s"+saveindex)
-          console.log("i"+index)
-        }else{
-          indexInF = index
-          console.log("s"+saveindex)
-          console.log("i"+index)
-        }
+        var indexInF =index;
+
         console.log("f"+indexInF)
         let buttonEdit = document.querySelector(`.editEvent${indexInF}`);
         let todoText = document.querySelector(`.todoText${indexInF}`)
@@ -111,8 +104,6 @@
           buttonEdit.classList.remove(`editEvent${indexInF}`, "btn-warning", "btn-outline-warning", "text-black")
           saveindex = indexInF
           document.getElementsByTagName('button').disabled = true
-          // deleteItem()
-          save() 
         }
     }
 
@@ -125,7 +116,7 @@
         buttonSave.innerText = "編輯"
         buttonSave.classList.add(`editEvent${saveindex}`, "btn-warning", "btn-outline-warning", "text-black")
         buttonSave.classList.remove(`.saveEvent${saveindex}`, "btn-success", "btn-outline-success", "text-white")
-        edit()
+
       }
       
     }
